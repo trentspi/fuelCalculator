@@ -1,20 +1,3 @@
-'''
-
-date = input("What is the date? (mm/dd/yy) \n")
-gallonsgas = float(input("How much gas was filled into the car? \n"))
-pricegas = float(input("How much did it cost to fill the car? \n"))
-bfmiles = int(input("How many miles did your car have during last recorded fill? \n"))
-afmiles = int(input("How many miles did your car have after filling? \n"))
-
-miles = afmiles - bfmiles
-gas = round(pricegas / gallonsgas, 2)
-mpg = round(miles / gallonsgas, 2)
-
-print("On {date}, you filled up {gallonsgas} gallons, with a gas mileage of {mpg} MPG.".format(date = date, gallonsgas = gallonsgas, mpg = mpg) +
-" Gas on {date} was approximately {gas} dollars per gallon.".format(date = date, gas = gas))
-
-'''
-
 class fuelCalculator(object):
     def __init__(self):
         self.__date = "mm/dd/yyyy"  #initialize date
@@ -23,24 +6,62 @@ class fuelCalculator(object):
         self.__miles = 0            #initialize miles
 
     @property #date property
+    def date(self):
+        return self.__date
+    @date.setter#date setter
     def date(self, date):
         self.__date = date
         return self.__date
 
     @property #price of gas property
+    def pricegas(self):
+        return self.__pricegas
+    @pricegas.setter
     def pricegas(self, price):
         self.__pricegas = float(price)
         return self.__pricegas
 
-    @property
+    @property #gallons of gas
+    def gallonsgas(self):
+        return self.__gallonsgas
+    @gallonsgas.setter
     def gallonsgas(self, gallons):
         self.__gallonsgas = gallons
-        return self.__gallonsgas 
+        return self.__gallonsgas
 
-    def miles(self, before, after):
-        before = int(before)
-        after = int(after)
-        self.__miles = after - before
+    @property #property for setting miles (int)
+    def miles(self):
+        return self.__miles
+    @miles.setter
+    def miles(self, dist):
+        self.__miles = int(miles)
         return self.__miles
 
-    def mpg(self, gallons, miles):
+    def setMilesRange(self, before, after): #range method for calculating miles (int)
+        before = int(before)
+        after = int(after)
+        self.__miles = abs(after - before)
+        return self.__miles
+
+    def mpg(self): #calculate MPG, assuming miles and gallons properties are already set
+        mpgR = round(self.__miles / self.__gallonsgas, 2) #miles per gallon equates to > miles / gallons
+        return ("{}".format(mpgR))
+
+    def status(self): #status method
+        try:
+            print("On {date}, you filled up {gallonsgas} gallons of gas, with a gas mileage of {mpg}".format(date = self.date, gallonsgas = self.gallonsgas, mpg = self.mpg()))
+            print("Gas on {date} was approximately {price} dollars per gallon.".format(date = self.date, price = self.pricegas))
+        except: #incase any properties are missing an error will be thrown and handled.
+            print("Missing required component(s). >> date, gallons of gas, price of gas, mpg")
+
+def main():
+    #testing the fuelCalculator class.
+    f = fuelCalculator()
+    f.date = "10/11/2016"
+    f.pricegas = 2.15
+    f.gallonsgas = 5
+    f.setMiles(100)
+    f.status()
+
+if __name__ == "__main__":
+    main()
