@@ -26,7 +26,7 @@ class fuelCalculator(object):
         return self.__gallonsgas
     @gallonsgas.setter
     def gallonsgas(self, gallons):
-        self.__gallonsgas = gallons
+        self.__gallonsgas = float(gallons)
         return self.__gallonsgas
 
     @property #property for setting miles (int)
