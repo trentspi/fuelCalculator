@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MPG Calculator</title>
+</head>
+
+<link action = "/static/<filepath:path>" method = "post" href="static/w3.css" rel="stylesheet" type="text/css"/>
+
+<body>
+<ul class = "w3-bottombar w3-border-light-green w3-navbar w3-green w3-top">
+<li class = "w3-hide-small w3-padding-large">Fuel Calculator</li>
+</ul>
+<br />
+<br />
+<div class = "w3-card-4 w3-margin">
+<div class = "w3-bottombar w3-border-light-green w3-container w3-green">
+  <h6>MPG Calculator</h6>
+</div>
+
+<form action = "/" class="w3-container" method = "post">
+Enter date when gas was filled: <input class = "w3-input" type="text" name="date" placeholder = "mm/dd/yyyy">
+
+Total price spend on gas: ($ USD) <input class="w3-input" type="text" name="price">
+
+Gallons of gas filled during fueling: (G) <input class="w3-input" type="text" name="gallons">
+
+Odometer reading when the car was previously fueled? (Miles) <input class="w3-input" type="text" name="distbefore">
+
+Odometer reading when the car was recently fueled? (Miles)<input class="w3-input" type="text" name="distafter">
+<br />
+<button class="w3-btn-block w3-round-xxlarge w3-green">Calculate!</button>
+
+</form>
+<br />
+</div>
+<div class = "w3-card-4 w3-margin">
+
+<table id = "d01" class="w3-table-all w3-striped w3-bordered">
+  <div class = "w3-bottombar w3-border-light-green w3-container w3-green">
+  <h6>MPG Entries</h6>
+  </div>
+  <tr>
+    <th>Date</th>
+    <th>MPG</th>
+    <th>Miles</th>
+    <th>Gallons</th>
+    <th>Total Spent</th>
+    <th>Price of Gas</th>
+  </tr>
+    <tr>
+      <td>11/10/16</td>
+      <td>29.18</td>
+      <td>187</td>
+      <td>6.407</td>
+      <td>12.47</td>
+      <td>1.94</td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
