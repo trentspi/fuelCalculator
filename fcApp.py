@@ -12,11 +12,14 @@ def index():
 
 @post('/')
 def calMPG():
-    distbefore = int(request.forms.get('distbefore'))
-    distafter = int(request.forms.get('distafter'))
-    date = request.forms.get('date')
-    price = float(request.forms.get('price'))
-    gallons = float(request.forms.get('gallons'))
+    try:
+        distbefore = int(request.forms.get('distbefore'))
+        distafter = int(request.forms.get('distafter'))
+        date = request.forms.get('date')
+        price = float(request.forms.get('price'))
+        gallons = float(request.forms.get('gallons'))
+    except ValueError:
+        print("ERROR, NO VALUE ENTERED FOR CALCULATION")
 
     f = fuelCalculator()
     f.date = date

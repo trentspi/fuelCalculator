@@ -14,11 +14,7 @@
 </ul>
 <br />
 <br />
-<div class = "w3-card-4 w3-margin container">
-<div class = "w3-bottombar w3-border-light-green w3-container w3-green">
-  <h6>MPG Calculator</h6>
-</div>
-
+<div class = "w3-card-4 w3-margin container movedown">
 <div class="w3-container">
 Enter date when gas was filled: <input class = "w3-input" type="text" id = "date" name="date" placeholder = "mm/dd/yyyy">
 
@@ -30,7 +26,7 @@ Odometer reading when the car was previously fueled? (Miles) <input class="w3-in
 
 Odometer reading when the car was recently fueled? (Miles)<input class="w3-input" type="text" id = "distafter" name="distafter">
 <br />
-<button class="w3-btn-block w3-round-xxlarge w3-green">Calculate!</button>
+<button class="w3-btn-block w3-round-xxlarge w3-green container">Calculate!</button>
 </div>
 
 <br />
@@ -38,7 +34,7 @@ Odometer reading when the car was recently fueled? (Miles)<input class="w3-input
 <div class = "w3-card-4 w3-margin container">
 <table id = "tab" class="w3-table-all w3-striped w3-bordered">
   <div class = "w3-bottombar w3-border-light-green w3-container w3-green">
-  <h6>MPG Entries</h6>
+  <h6>Calculated Entries</h6>
   </div>
   <tr>
     <th>Date</th>
@@ -53,14 +49,14 @@ Odometer reading when the car was recently fueled? (Miles)<input class="w3-input
 </div>
 
 <script>
-$("button").click(function() {
-  var formdata = {
-    distbefore : document.getElementById('distbefore').value,
-    distafter : document.getElementById('distafter').value,
-    date : document.getElementById('date').value,
-    price : document.getElementById('price').value,
-    gallons : document.getElementById('gallons').value
-  };
+  $("button").click(function() {
+      var formdata = {
+          distbefore : document.getElementById('distbefore').value,
+          distafter : document.getElementById('distafter').value,
+          date : document.getElementById('date').value,
+          price : document.getElementById('price').value,
+          gallons : document.getElementById('gallons').value
+        };
   $.ajax({
     type: 'POST',
     url: '/',
@@ -84,6 +80,7 @@ $("button").click(function() {
       td4.innerHTML = data['pricegas'];
       td5.innerHTML = data['pricepg'];
 
+      row.style.display = 'none';
       row.appendChild(td0);
       row.appendChild(td1);
       row.appendChild(td2);
@@ -91,11 +88,18 @@ $("button").click(function() {
       row.appendChild(td4);
       row.appendChild(td5);
 
-      table.appendChild(row);
+      row = table.appendChild(row);
+      $(row).fadeIn(250);
 
     }
   });
+  document.getElementById('distbefore').value = '';
+  document.getElementById('distafter').value = '';
+  document.getElementById('date').value = '';
+  document.getElementById('price').value = '';
+  document.getElementById('gallons').value = '';
 });
+
 </script>
 
 </body>

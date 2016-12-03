@@ -1,4 +1,9 @@
 .container {
   width:50%;
   margin:0 auto!important;
+  display: block;
+}
+
+.movedown {
+  padding-top:30px;
 }
