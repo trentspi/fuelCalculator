@@ -4,7 +4,7 @@ class fuelCalculator(object):
         self.__pricegas = 0         #initialize price of gas
         self.__gallonsgas = 0       #initialize gallons of gas
         self.__miles = 0            #initialize miles
-        self.__pricepg = 0.0          #initialize price per gallon
+        self.__pricepg = 0         #initialize price per gallon
 
     @property #date property
     def date(self):
@@ -23,8 +23,8 @@ class fuelCalculator(object):
         return self.__pricegas
 
     @property
-    def pricepg(self):
-        return self.__pricepg
+    def pricepgi(self):
+        return float(self.__pricepg)
 
     @property #gallons of gas
     def gallonsgas(self):
@@ -46,6 +46,7 @@ class fuelCalculator(object):
         price = float(price)
         gallons = float(gallons)
         self.__pricepg = abs(price / gallons)
+        self.__pricepg = round(self.__pricepg, 2)
         return self.__pricepg
 
     def setMilesRange(self, before, after): #range method for calculating miles (int)
