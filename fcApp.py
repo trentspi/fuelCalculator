@@ -2,6 +2,10 @@ from bottle import static_file, run, template, route, post, request, error
 from fuelCalculator import * #import FC class
 import json
 
+@error(404)
+def error404(error):
+    return template('error.html')
+
 @route('/static/<filepath:path>') #static route for files in the static folder
 def server_static(filepath):
     return static_file(filepath, root='./static/') #returns static files (W3.CSS, main.CSS)
