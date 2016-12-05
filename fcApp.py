@@ -1,6 +1,7 @@
-from bottle import static_file, run, template, route, post, request, error
+from bottle import static_file, run, template, route, get, post, request, error
 from fuelCalculator import * #import FC class
-import json
+from fcStartDB import * #import FC start database class
+import json, sqlite3, os.path
 
 @error(404)
 def error404(error):
@@ -11,11 +12,17 @@ def server_static(filepath):
     return static_file(filepath, root='./static/') #returns static files (W3.CSS, main.CSS)
 
 @route('/') #main route, displays index.html
+
 def index():
-  return template('index.html')
+    return template('index.html')
 
 @post('/')
 def calMPG():
+    databasePresent = os.path.isfile('./fcData.db')
+    if databasePresent == False:
+        s = fcStartDB()
+        s.startDB()
+
     try:
         distbefore = int(request.forms.get('distbefore'))
         distafter = int(request.forms.get('distafter'))
@@ -32,6 +39,29 @@ def calMPG():
     f.setMilesRange(distbefore, distafter)
     f.pricepg(price, gallons)
 
+    conn = sqlite3.connect('fcData.db')
+    c = conn.cursor()
+    c.execute('''INSERT INTO MPGEntries (
+                    date,
+                    mpg,
+                    miles,
+                    gallonsgas,
+                    pricegas,
+                    pricepg
+                )
+                VALUES (?, ?, ?, ?, ?, ?)''',
+                (
+                    f.date,
+                    f.mpg(),
+                    f.miles,
+                    f.gallonsgas,
+                    f.pricegas,
+                    f.pricepgi,
+                )
+            )
+    conn.commit()
+    conn.close()
+
     rv = {
         "date": f.date,
         "mpg": f.mpg(),
@@ -40,7 +70,8 @@ def calMPG():
         "pricegas": "$" + str(f.pricegas),
         "pricepg": "$" + str(f.pricepgi)
     }
-    print(f.pricepg)
+
     return json.dumps(rv)
+
 
 run(host= "localhost", port = 8080, debug = True, reloader = True)
