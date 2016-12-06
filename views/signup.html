@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fuel Calculator Sign Up!</title>
+  <link href="static/w3.css" rel="stylesheet" type="text/css">
+  <link href="static/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class = "w3-green">
+  <form action = '/signup' method = 'post'>
+    <div class = "w3-white w3-display-middle w3-card-4 w3-margin container movedown">
+        <div class="w3-container">
+          <h2> Sign up for Fuel Calculator! </h2>
+          <input class = "w3-input" type="text" id = "fname" name="fname" placeholder = "Enter your name">
+          <input class = "w3-input" type="text" id = "username" name="username" placeholder = "Enter a username">
+          <input class = "w3-input" type="password" id = "password" name="password" placeholder = "Enter a password">
+            <br>
+          <button class = "w3-btn-block w3-round-xxlarge w3-green container" onclick = "btntest_onclick()">Create account</button>
+          <br>
+          <br>
+       </div>
+    </div>
+  </form>
+  <script>
+    function btntest_onclick()
+    {
+       console.log("fname: " + document.getElementById('fname'))
+       document.cookie = "fname="+ document.getElementById('fname').value;
+       window.location.href ="http://localhost:8080/";
+    }
+  </script>
+</body>

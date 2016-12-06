@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fuel Calculator Login!</title>
+  <link href="static/w3.css" rel="stylesheet" type="text/css">
+  <link href="static/main.css" rel="stylesheet" type="text/css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body class = "w3-green">
+    <div class = "w3-white w3-display-middle w3-card-4 w3-margin container movedown">
+        <div class="w3-container">
+          <h2> Login to Fuel Calculator! </h2>
+          <input class = "w3-input" type="text" id = "username" name="username" placeholder = "username">
+          <input class = "w3-input" type="password" id = "password" name="password" placeholder = "password">
+          <br>
+          <button id = "login" class = "w3-btn-block w3-round-xxlarge w3-green container">Login</button>
+          <br>
+          <br>
+          <button id = "createacc" class = "w3-btn-block w3-round-xxlarge w3-green container">Create Account</button>
+          <script>
+          $("#createacc").click(function() {
+            window.location.href = "http://localhost:8080/signup";
+          });
+          </script>
+          <br>
+          <br>
+       </div>
+
+
+
+       <script>
+       $("#login").click(function() {
+          var formdata = {
+            username : document.getElementById('username').value,
+            password : document.getElementById('password').value
+          };
+          $.ajax({
+            type: 'POST',
+            url: '/',
+            data: formdata,
+            dataType: 'JSON',
+            complete: function(response, status){
+                var data = response.responseJSON;
+
+                document.cookie = "username="+formdata.username;
+
+                if (formdata.username == data['username'])
+                {
+                  if (formdata.password == data['password'])
+                  {
+                    console.log("accepted password");
+                    window.location.href = "http://localhost:8080/calculate";
+                  }
+                }
+            }
+          });
+        });
+       </script>
+    </div>
+
+</body>
