@@ -28,8 +28,6 @@ def loadIndex():
 def loadData():
     s = fcStartDB()
     uid = request.forms.get("userid")
-    uid = request.forms.get("userid")
-    print("username from loadData {}".format(uid))
     return s.loadDB(uid)
 
 

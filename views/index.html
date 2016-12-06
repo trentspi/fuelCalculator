@@ -5,11 +5,12 @@
   <title>Fuel Calculator</title>
   <link href="static/w3.css" rel="stylesheet" type="text/css">
   <link href="static/main.css" rel="stylesheet" type="text/css">
-
-  <!--<link href="http://code.jquery.com/ui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet" type="text/css">
-  <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+  crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -34,7 +35,7 @@
   <div style = "margin-top:50px" class="w3-container">
   <div class = "w3-card-4 w3-margin container">
     <div class = "w3-margin-left w3-padding-64">
-    Enter date when gas was filled: <input class = "w3-input" type="text" id = "date" name="date" placeholder = "mm/dd/yyyy">
+    Enter date when gas was filled: <input class = "w3-input" type="text" id = "datepicker" name="date" placeholder = "mm/dd/yyyy">
 
     Total price spend on gas: ($ USD) <input class="w3-input" type="text" id = "price" name="price">
 
@@ -64,6 +65,12 @@
 
   <script>
     $( document ).ready(function() {
+      $( function() {
+        $( "#datepicker" ).datepicker({
+          changeMonth: true,
+          changeYear: true
+        });
+      } );
       var userValue = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       $.ajax({
         type: 'POST',
@@ -73,7 +80,6 @@
         complete: function(response, status){
             var table = document.getElementById('tab');
             var data = response.responseJSON;
-            console.log(data)
             if (data != undefined) {
               console.log("data found")
               i = data.length;
@@ -115,17 +121,12 @@
         var formData = {
             distbefore : document.getElementById('distbefore').value,
             distafter : document.getElementById('distafter').value,
-            date : document.getElementById('date').value,
+            date : String(document.getElementById('datepicker').value),
             price : document.getElementById('price').value,
             gallons : document.getElementById('gallons').value,
             userid : userValue
           };
-          console.log("userValue cookie:" + userValue)
-          console.log("distbefore data: " + formData['distbefore'])
-          console.log("distafter data: " + formData['distafter'])
-          console.log("date data:" + formData['date'])
-          console.log("price data: " + formData['price'])
-          console.log("gallons data: " + formData['gallons'])
+          console.log(formData['date']);
     $.ajax({
       type: 'POST',
       url: '/calculate',
@@ -166,7 +167,7 @@
     });
     document.getElementById('distbefore').value = '';
     document.getElementById('distafter').value = '';
-    document.getElementById('date').value = '';
+    document.getElementById('datepicker').value = '';
     document.getElementById('price').value = '';
     document.getElementById('gallons').value = '';
   });
