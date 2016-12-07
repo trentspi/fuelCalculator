@@ -27,7 +27,7 @@ def loadIndex():
 @route('/getMPG', method = "POST")
 def loadData():
     s = fcStartDB()
-    uid = request.forms.get("userid")
+    uid = request.forms.get("userid") #requests data only for a given user
     return s.loadDB(uid)
 
 
@@ -39,6 +39,7 @@ def signup():
     if databasePresent == False:
         s.startDB()
         f.startDB()
+    #pulls necessary data from front end form
     fname = request.forms.get('fname')
     username = request.forms.get('username')
     password = request.forms.get('password')
@@ -49,37 +50,35 @@ def signup():
 def login():
     s = fcCreateAccount()
     rv = ""
+    #pulls necessary data from front end form
     uname = request.forms.get('username')
     pword = request.forms.get('password')
 
     if s.checkUser(uname, pword):
 
-        rv = {
+        rv = { #checks for correct username + password in db
         "username": uname,
         "password": pword
         }
 
-    return json.dumps(rv)
+    return json.dumps(rv) #return json object of user
 
 @post('/calculate')
 def calcMPG():
     try:
+        #form data + username
         username = request.forms.get('userid')
-        print("username found in bottle route: {}".format(username))
         distbefore = request.forms.get('distbefore')
         distafter = request.forms.get('distafter')
         date = request.forms.get('date')
-        print(request.forms.get('price'))
         price = float(request.forms.get('price'))
         gallons = float(request.forms.get('gallons'))
 
     except ValueError:
         print("ERROR, NO VALUE ENTERED FOR CALCULATION")
 
-    print("date: {}".format(date))
     f = fuelCalculator()
     f.date = date
-    print("f.date: {}".format(f.date))
     f.pricegas = price
     f.gallonsgas = gallons
     f.setMilesRange(distbefore, distafter)
@@ -87,6 +86,8 @@ def calcMPG():
 
     conn = sqlite3.connect('fcData.db')
     c = conn.cursor()
+    #insert calculation as DB query
+    #pass values as substituted parameters to avoid injection flaws
     c.execute('''INSERT INTO MPGEntries (
                     username,
                     date,
@@ -109,7 +110,7 @@ def calcMPG():
             )
     conn.commit()
     conn.close()
-
+    #pack for json export
     rv = {
         "userid": username,
         "date": f.date,
@@ -122,4 +123,4 @@ def calcMPG():
 
     return json.dumps(rv)
 
-run(host= "localhost", port = 8080, debug = True, reloader = True)
+run(host= "localhost", port = 8080, debug = True, reloader = True)  #reloader = True refreshes the server automatically :)

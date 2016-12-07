@@ -5,12 +5,12 @@
   <title>Fuel Calculator</title>
   <link href="static/w3.css" rel="stylesheet" type="text/css">
   <link href="static/main.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css"> <!-- JQuery UI theme -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
   integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script> <!-- integrity and crossorigin were supplied by the official jquery CDN -->
 </head>
 
 <body>
@@ -18,20 +18,22 @@
     <li class = "w3-padding-large"><h3>Fuel Calculator</h3></li>
     <div class = "w3-right">
     <li class = " w3-hide-small w3-padding-large"><h3>Hello, <span id = "hello">%</span></h3></li>
-    <li style = "position:relative; top: 11px" class = "w3-padding-large"><button class = "w3-hide-small w3-btn-block w3-round-xxlarge w3-white" id = "logout" onclick = "return btntest_onclick()">Logout</button></li>
+    <!-- lazy in-line styling, a quick hack outside of the main W3.CSS library -->
+    <li style = "position:relative; top: 11px" class = "w3-padding-large"><button class = "w3-hide-small w3-btn-block w3-round-xxlarge w3-white" id = "logout" onclick = "logout_btn()">Logout</button></li>
     </div>
   </ul>
   <script>
-    var userName = document.cookie.replace(/(?:(?:^|.*;\s*)fname\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    var userName = document.cookie.replace(/(?:(?:^|.*;\s*)fname\s*\=\s*([^;]*).*$)|^.*$/, "$1"); //handy cookie retreival, code found on Mozilla docs
     console.log(userName)
     document.getElementById('hello').innerHTML = userName;
 
-    function btntest_onclick()
+    function logout_btn()
     {
         window.location.href = "http://localhost:8080/";
     }
   </script>
 
+  <!-- frontend form -->
   <div style = "margin-top:50px" class="w3-container">
   <div class = "w3-card-4 w3-margin container">
     <div class = "w3-margin-left w3-padding-64">
@@ -64,10 +66,10 @@
   </div>
 
   <script>
-    $( document ).ready(function() {
-      $( function() {
+    $( document ).ready(function() { //runs when page is loaded
+      $( function() { //code found on example from JQuery-ui
         $( "#datepicker" ).datepicker({
-          changeMonth: true,
+          changeMonth: true, //dropdown lists for month and year
           changeYear: true
         });
       } );
@@ -75,14 +77,15 @@
       $.ajax({
         type: 'POST',
         url: '/getMPG',
-        data: {'userid': userValue},
+        data: {'userid': userValue}, // uses userid for loading user-specific data
         dataType: 'JSON',
         complete: function(response, status){
-            var table = document.getElementById('tab');
-            var data = response.responseJSON;
-            if (data != undefined) {
+            var table = document.getElementById('tab'); // gets table for appending to it
+            var data = response.responseJSON; // JSON pack
+            if (data != undefined) { //given there is JSON data
               console.log("data found")
               i = data.length;
+              //append through all data entries
               for (var r = 0; r < i; r++) {
                 var row = document.createElement('tr');
                 var td0 = document.createElement('td');
@@ -126,17 +129,15 @@
             gallons : document.getElementById('gallons').value,
             userid : userValue
           };
-          console.log(formData['date']);
+
     $.ajax({
       type: 'POST',
       url: '/calculate',
       data: formData,
       dataType: 'JSON',
-      complete: function(response, status){
-        console.log("response in function:: " + response)
+      complete: function(response, status){ //adds new entry to the table
         var table = document.getElementById('tab');
-        var data = response.responseJSON;
-        console.log("DATA: " + data)
+        var data = response.responseJSON; // JSON packaging
         var row = document.createElement('tr');
         var td0 = document.createElement('td');
         var td1 = document.createElement('td');
@@ -165,6 +166,7 @@
 
       }
     });
+    //resets form data with empty strings
     document.getElementById('distbefore').value = '';
     document.getElementById('distafter').value = '';
     document.getElementById('datepicker').value = '';
