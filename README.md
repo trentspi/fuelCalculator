@@ -1,4 +1,4 @@
-# Python Fuel Calculator class + GUI
+# Python Fuel Calculator Application
 **Description**: 
   This application was created as the final project for the IUPUI CSCI 23000 course. Fuel Calculator can help you monitor how many Miles to the Gallon your car is travelling, while also saving your fueling data in a table.
 
