@@ -29,7 +29,7 @@ To run the fuelCalculator application, an install of **Python** must be present 
 
 ## Installation + Setup Instructions
   - Download / Clone repository onto local machine
-  - Run the following command "python fcApp.py" to start the server
-  - Navigate to http://localhost:8080 in your web browser
+  - Run the following command `python fcApp.py` to start the server
+  - Navigate to [http://localhost:8080](http://localhost:8080) in your web browser
   - Create an account
   - Login to your account
