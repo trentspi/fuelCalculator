@@ -24,7 +24,7 @@
   - JQuery UI
   - W3.CSS
 
-#Usage
+# Usage
 To run the fuelCalculator application, an install of **Python** must be present on your machine.
 
 ## Installation + Setup Instructions
