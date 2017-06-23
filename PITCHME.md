@@ -1,15 +1,6 @@
 ---
 
-Fuel Calculator with Bottle.py
-
----
-
-Technologies Used
-
-- Bottle.py
-- SQLite3
-- JQuery
-- W3.CSS
+# Bottle.py
 
 ---
 
@@ -24,4 +15,15 @@ def index(name):
 
 run(host='localhost', port=8080)
 ```
+
+--- 
+
+Technologies Used
+
+- Bottle.py
+- SQLite3
+- JQuery
+- W3.CSS
+
+---
 
