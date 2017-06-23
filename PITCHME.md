@@ -6,6 +6,8 @@
 
 Bottle is a fast, simple and lightweight WSGI micro web-framework for Python. It is distributed as a single file module and has no dependencies other than the Python Standard Library.
 
+---
+
 - Routing: Requests to function-call mapping with support for clean and dynamic URLs.
 - Templates: Fast and pythonic built-in template engine and support for mako, jinja2 and cheetah templates.
 - Utilities: Convenient access to form data, file uploads, cookies, headers and other HTTP-related metadata.
