@@ -1,10 +1,10 @@
 ---
 
-## Fuel Calculator with Bottle.py
+Fuel Calculator with Bottle.py
 
 ---
 
-## Technologies Used
+Technologies Used
 
 - Bottle.py
 - SQLite3
@@ -13,7 +13,7 @@
 
 ---
 
-## Hello World with Bottle.py
+Hello World with Bottle.py
 
 ```
 from bottle import route, run, template
