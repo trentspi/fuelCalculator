@@ -33,7 +33,7 @@ def loadData():
 
 @post('/signup')
 def signup():
-    databasePresent = os.path.isfile('./fcData.db') #check for created database file
+    databasePresent = os.path.isfile('./fcData.db') #check for a created database
     s = fcCreateAccount()
     f = fcStartDB()
     if databasePresent == False:
