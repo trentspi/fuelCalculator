@@ -63,7 +63,7 @@ Technologies Used
 
 ---
 
-Trenton Spice - Computer Science @ IUPUI
+Trent Spice - Computer Science @ IUPUI
 
 - Web developer @ Cole's Marketing
 - Python research project (SCATE) @ SEDS IUPUI
