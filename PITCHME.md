@@ -32,3 +32,9 @@ Technologies Used
 - W3.CSS
 
 ---
+
+Trenton Spice
+
+http://github.com/trentspi
+
+http://linkedin.com/in/trentonspice
